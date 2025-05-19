@@ -1,0 +1,1333 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "OwnableInvalidOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "OwnableUnauthorizedAccount",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					}
+				],
+				"name": "AlertActivated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "enum Dashboard.AlertCondition",
+						"name": "condition",
+						"type": "uint8"
+					},
+					{
+						"indexed": false,
+						"internalType": "int256",
+						"name": "threshold1",
+						"type": "int256"
+					},
+					{
+						"indexed": false,
+						"internalType": "int256",
+						"name": "threshold2",
+						"type": "int256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "message",
+						"type": "string"
+					}
+				],
+				"name": "AlertConfigured",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					}
+				],
+				"name": "AlertDeactivated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					}
+				],
+				"name": "AlertTriggerReset",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "int256",
+						"name": "currentValue",
+						"type": "int256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "message",
+						"type": "string"
+					}
+				],
+				"name": "AlertTriggered",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "int256",
+						"name": "marketAverage",
+						"type": "int256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "MarketPerformersUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "narrativeName",
+						"type": "string"
+					}
+				],
+				"name": "NarrativeKeyAdded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "narrativeName",
+						"type": "string"
+					}
+				],
+				"name": "NarrativeKeyRemoved",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "narrativeName",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "int256",
+						"name": "performancePercent",
+						"type": "int256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "NarrativePerformanceUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "narrativeName",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "tokenSymbol",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "int256",
+						"name": "relativePerformance",
+						"type": "int256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "NarrativeTopTokenUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "int256",
+						"name": "amount",
+						"type": "int256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "NetflowUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "int256",
+						"name": "daily",
+						"type": "int256"
+					},
+					{
+						"indexed": false,
+						"internalType": "int256",
+						"name": "weekly",
+						"type": "int256"
+					},
+					{
+						"indexed": false,
+						"internalType": "int256",
+						"name": "monthly",
+						"type": "int256"
+					},
+					{
+						"indexed": false,
+						"internalType": "int256",
+						"name": "marketCapChange",
+						"type": "int256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "StablecoinOverallNetflowUpdated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum Dashboard.AlertCondition",
+						"name": "_condition",
+						"type": "uint8"
+					},
+					{
+						"internalType": "int256",
+						"name": "_channelBound1",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "_channelBound2",
+						"type": "int256"
+					},
+					{
+						"internalType": "string",
+						"name": "_message",
+						"type": "string"
+					}
+				],
+				"name": "DoubleNetflowAlert",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "MAX_ALERTS_PER_USER",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum Dashboard.AlertCondition",
+						"name": "_condition",
+						"type": "uint8"
+					},
+					{
+						"internalType": "int256",
+						"name": "_threshold1",
+						"type": "int256"
+					},
+					{
+						"internalType": "string",
+						"name": "_message",
+						"type": "string"
+					}
+				],
+				"name": "SingleThresholdNetflowAlert",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "activateAlert",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_narrativeName",
+						"type": "string"
+					},
+					{
+						"internalType": "int256",
+						"name": "_performancePercent",
+						"type": "int256"
+					}
+				],
+				"name": "addOrUpdateNarrativePerformance",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "int256",
+								"name": "performancePercent24h",
+								"type": "int256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "lastUpdatedAt",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct DataTypes.NarrativePerformanceInfo[]",
+						"name": "_performances",
+						"type": "tuple[]"
+					}
+				],
+				"name": "batchUpdateNarrativePerformances",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "exchangeNetflow",
+				"outputs": [
+					{
+						"internalType": "int256",
+						"name": "amount",
+						"type": "int256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastUpdatedAt",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getAllNarrativeKeys",
+				"outputs": [
+					{
+						"internalType": "string[]",
+						"name": "",
+						"type": "string[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getAllNetflowAlerts",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "user",
+								"type": "address"
+							},
+							{
+								"internalType": "enum Dashboard.AlertCondition",
+								"name": "condition",
+								"type": "uint8"
+							},
+							{
+								"internalType": "int256",
+								"name": "threshold1",
+								"type": "int256"
+							},
+							{
+								"internalType": "int256",
+								"name": "threshold2",
+								"type": "int256"
+							},
+							{
+								"internalType": "bool",
+								"name": "isActive",
+								"type": "bool"
+							},
+							{
+								"internalType": "bool",
+								"name": "isTriggered",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "lastTriggeredAt",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "message",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Dashboard.NetflowAlert[]",
+						"name": "alerts",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_narrativeName",
+						"type": "string"
+					}
+				],
+				"name": "getNarrativePerformance",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "int256",
+								"name": "performancePercent24h",
+								"type": "int256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "lastUpdatedAt",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct DataTypes.NarrativePerformanceInfo",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_narrativeName",
+						"type": "string"
+					}
+				],
+				"name": "getNarrativeTopPerformer",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "narrativeName",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "tokenSymbol",
+								"type": "string"
+							},
+							{
+								"internalType": "int256",
+								"name": "relativePerformancePercent",
+								"type": "int256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "lastUpdatedAt",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct DataTypes.NarrativeTopTokenInfo",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getTopOutperformingAssets",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "tokenSymbol",
+								"type": "string"
+							},
+							{
+								"internalType": "address",
+								"name": "tokenAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "int256",
+								"name": "performancePercent24h",
+								"type": "int256"
+							},
+							{
+								"internalType": "int256",
+								"name": "performanceVsMarketPercent",
+								"type": "int256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "lastUpdatedAt",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct DataTypes.AssetPerformanceInfo[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getTopUnderperformingAssets",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "tokenSymbol",
+								"type": "string"
+							},
+							{
+								"internalType": "address",
+								"name": "tokenAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "int256",
+								"name": "performancePercent24h",
+								"type": "int256"
+							},
+							{
+								"internalType": "int256",
+								"name": "performanceVsMarketPercent",
+								"type": "int256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "lastUpdatedAt",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct DataTypes.AssetPerformanceInfo[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "hasPreviousExchangeNetflowAmount",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "marketAverageMovementPercent24h",
+				"outputs": [
+					{
+						"internalType": "int256",
+						"name": "",
+						"type": "int256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "marketPerformanceLastUpdatedAt",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "narrativeKeys",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "narrativePerformances",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "int256",
+						"name": "performancePercent24h",
+						"type": "int256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastUpdatedAt",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "narrativeTopPerformers",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "narrativeName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "tokenSymbol",
+						"type": "string"
+					},
+					{
+						"internalType": "int256",
+						"name": "relativePerformancePercent",
+						"type": "int256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastUpdatedAt",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "previousExchangeNetflowAmount",
+				"outputs": [
+					{
+						"internalType": "int256",
+						"name": "",
+						"type": "int256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_narrativeName",
+						"type": "string"
+					}
+				],
+				"name": "removeNarrativeKey",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "resetAlertTriggerState",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "stablecoinExchangeOverallNetflow",
+				"outputs": [
+					{
+						"internalType": "int256",
+						"name": "dailyNetflowSum",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "weeklyNetflowSum",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "monthlyNetflowSum",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "marketCapChangePercent",
+						"type": "int256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastUpdatedAt",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "topOutperformingAssets",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "tokenSymbol",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "tokenAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "int256",
+						"name": "performancePercent24h",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "performanceVsMarketPercent",
+						"type": "int256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastUpdatedAt",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "topUnderperformingAssets",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "tokenSymbol",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "tokenAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "int256",
+						"name": "performancePercent24h",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "performanceVsMarketPercent",
+						"type": "int256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastUpdatedAt",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "turnOffAlert",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "int256",
+						"name": "_amount",
+						"type": "int256"
+					}
+				],
+				"name": "updateExchangeNetflow",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "tokenSymbol",
+								"type": "string"
+							},
+							{
+								"internalType": "address",
+								"name": "tokenAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "int256",
+								"name": "performancePercent24h",
+								"type": "int256"
+							},
+							{
+								"internalType": "int256",
+								"name": "performanceVsMarketPercent",
+								"type": "int256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "lastUpdatedAt",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct DataTypes.AssetPerformanceInfo[]",
+						"name": "_topOutperformers",
+						"type": "tuple[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "tokenSymbol",
+								"type": "string"
+							},
+							{
+								"internalType": "address",
+								"name": "tokenAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "int256",
+								"name": "performancePercent24h",
+								"type": "int256"
+							},
+							{
+								"internalType": "int256",
+								"name": "performanceVsMarketPercent",
+								"type": "int256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "lastUpdatedAt",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct DataTypes.AssetPerformanceInfo[]",
+						"name": "_topUnderperformers",
+						"type": "tuple[]"
+					},
+					{
+						"internalType": "int256",
+						"name": "_marketAvgMove24h",
+						"type": "int256"
+					}
+				],
+				"name": "updateMarketPerformance",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_narrativeName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_tokenSymbol",
+						"type": "string"
+					},
+					{
+						"internalType": "int256",
+						"name": "_relativePerformancePercent",
+						"type": "int256"
+					}
+				],
+				"name": "updateNarrativeTopPerformer",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "int256",
+						"name": "_dailyNetflow",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "_weeklyNetflow",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "_monthlyNetflow",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "_marketCapChangePercent",
+						"type": "int256"
+					}
+				],
+				"name": "updateStablecoinOverallNetflow",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "userNetflowAlert",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"internalType": "enum Dashboard.AlertCondition",
+						"name": "condition",
+						"type": "uint8"
+					},
+					{
+						"internalType": "int256",
+						"name": "threshold1",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "threshold2",
+						"type": "int256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isActive",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isTriggered",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastTriggeredAt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "message",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "userNetflowAlerts",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"internalType": "enum Dashboard.AlertCondition",
+						"name": "condition",
+						"type": "uint8"
+					},
+					{
+						"internalType": "int256",
+						"name": "threshold1",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "threshold2",
+						"type": "int256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isActive",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isTriggered",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastTriggeredAt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "message",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"errors": {
+				"OwnableInvalidOwner(address)": [
+					{
+						"details": "The owner is not a valid owner account. (eg. `address(0)`)"
+					}
+				],
+				"OwnableUnauthorizedAccount(address)": [
+					{
+						"details": "The caller account is not authorized to perform an operation."
+					}
+				]
+			},
+			"kind": "dev",
+			"methods": {
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/DashBoard.sol": "Dashboard"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8ed324d3920bb545059d66ab97d43e43ee85fd3bd52e03e401f020afb0b120f6",
+				"dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12",
+				"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
+			]
+		},
+		"contracts/DashBoard.sol": {
+			"keccak256": "0x2101219190d3e2c8241728abaa513634fd51e9353d79f5d5b9a8e77555eee45a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://db43e49e17cf3f087248d1c32f57907e57e763165ec02cff6f4fb06058a90057",
+				"dweb:/ipfs/QmYsFJjhoY7N8A9ZNVNGNRbDVHkN3E1GLjbnusELAYK1Y3"
+			]
+		},
+		"structs/DataTypes.sol": {
+			"keccak256": "0xd7843866b5eedaaf98123660b6faa939ed2faeddb0847314ae00c9b5e576ccb1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://cca52179dda5992b34c38697de2e2b436e81ab52c8bbcf137966425ebac65de2",
+				"dweb:/ipfs/QmNe8jWaJzaoNXj79UzETXhd5KZdSid21qoAYv14EnE4jA"
+			]
+		}
+	},
+	"version": 1
+}

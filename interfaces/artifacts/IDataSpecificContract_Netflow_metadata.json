@@ -1,0 +1,92 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "getCurrentNetflow",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "int256",
+								"name": "amount",
+								"type": "int256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "lastUpdatedAt",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct DataTypes.NetflowInfo",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "int256",
+						"name": "_amount",
+						"type": "int256"
+					}
+				],
+				"name": "updateNetflow",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"interfaces/Interfaces.sol": "IDataSpecificContract_Netflow"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"interfaces/Interfaces.sol": {
+			"keccak256": "0xee0530c67bc949f8da3eacda6169b1e5d3104f41d4625258972286d751892889",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6dae2815788644c715a148b06ff8a6c4cf0316c312e2f4a5f9f2805ae0fd865b",
+				"dweb:/ipfs/QmaeysmpTXnzDCvoKhc7ZLEjfmLasJZ1p4EHNCaZ9Gn3tP"
+			]
+		},
+		"structs/DataTypes.sol": {
+			"keccak256": "0x76f768078444977fb53601693a41788a3bf7a5cd6cf963871c33094de05ac4a7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://80859d867fad8cbb401ab53a763988462e07026830b843cd035d909228d47ee7",
+				"dweb:/ipfs/QmRaBbwdoTxzGKV9N1NmErSZLHTSvcgE1iQgXVivVz4FbB"
+			]
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,578 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_initialOwner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_dashboardNotifierAddress",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "OwnableInvalidOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "OwnableUnauthorizedAccount",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					}
+				],
+				"name": "AlertActivated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "user",
+								"type": "address"
+							},
+							{
+								"internalType": "enum DataTypes.AlertCondition",
+								"name": "condition",
+								"type": "uint8"
+							},
+							{
+								"internalType": "int256",
+								"name": "threshold1",
+								"type": "int256"
+							},
+							{
+								"internalType": "int256",
+								"name": "threshold2",
+								"type": "int256"
+							},
+							{
+								"internalType": "bool",
+								"name": "isActive",
+								"type": "bool"
+							},
+							{
+								"internalType": "bool",
+								"name": "isTriggered",
+								"type": "bool"
+							},
+							{
+								"internalType": "uint256",
+								"name": "lastTriggeredAt",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "message",
+								"type": "string"
+							}
+						],
+						"indexed": false,
+						"internalType": "struct DataTypes.AlertConfig",
+						"name": "config",
+						"type": "tuple"
+					}
+				],
+				"name": "AlertConfigured",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					}
+				],
+				"name": "AlertDeactivated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					}
+				],
+				"name": "AlertTriggerReset",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "int256",
+						"name": "currentValue",
+						"type": "int256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "message",
+						"type": "string"
+					}
+				],
+				"name": "AlertTriggered",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "int256",
+								"name": "amount",
+								"type": "int256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "lastUpdatedAt",
+								"type": "uint256"
+							}
+						],
+						"indexed": false,
+						"internalType": "struct DataTypes.NetflowInfo",
+						"name": "netflow",
+						"type": "tuple"
+					}
+				],
+				"name": "NetflowUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "activateAlert",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum DataTypes.AlertCondition",
+						"name": "_condition",
+						"type": "uint8"
+					},
+					{
+						"internalType": "int256",
+						"name": "_bound1",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "_bound2",
+						"type": "int256"
+					},
+					{
+						"internalType": "string",
+						"name": "_message",
+						"type": "string"
+					}
+				],
+				"name": "configureChannelAlert",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum DataTypes.AlertCondition",
+						"name": "_condition",
+						"type": "uint8"
+					},
+					{
+						"internalType": "int256",
+						"name": "_threshold1",
+						"type": "int256"
+					},
+					{
+						"internalType": "string",
+						"name": "_message",
+						"type": "string"
+					}
+				],
+				"name": "configureSingleThresholdAlert",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "currentNetflow",
+				"outputs": [
+					{
+						"internalType": "int256",
+						"name": "amount",
+						"type": "int256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastUpdatedAt",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "dashboardNotifier",
+				"outputs": [
+					{
+						"internalType": "contract IDashboardNotifier",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getCurrentNetflow",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "int256",
+								"name": "amount",
+								"type": "int256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "lastUpdatedAt",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct DataTypes.NetflowInfo",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "hasPreviousNetflowAmount",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "netflowAlert",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"internalType": "enum DataTypes.AlertCondition",
+						"name": "condition",
+						"type": "uint8"
+					},
+					{
+						"internalType": "int256",
+						"name": "threshold1",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "threshold2",
+						"type": "int256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isActive",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isTriggered",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastTriggeredAt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "message",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "previousNetflowAmount",
+				"outputs": [
+					{
+						"internalType": "int256",
+						"name": "",
+						"type": "int256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "resetAlertTriggerState",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_dashboardNotifierAddress",
+						"type": "address"
+					}
+				],
+				"name": "setDashboardNotifier",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "turnOffAlert",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "int256",
+						"name": "_amount",
+						"type": "int256"
+					}
+				],
+				"name": "updateNetflow",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"errors": {
+				"OwnableInvalidOwner(address)": [
+					{
+						"details": "The owner is not a valid owner account. (eg. `address(0)`)"
+					}
+				],
+				"OwnableUnauthorizedAccount(address)": [
+					{
+						"details": "The caller account is not authorized to perform an operation."
+					}
+				]
+			},
+			"kind": "dev",
+			"methods": {
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/BitcoinNetflowContract.sol": "BitcoinNetflowContract"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8ed324d3920bb545059d66ab97d43e43ee85fd3bd52e03e401f020afb0b120f6",
+				"dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12",
+				"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
+			]
+		},
+		"contracts/BitcoinNetflowContract.sol": {
+			"keccak256": "0x8f521c8f3822baa122c5d93ce9ed038a7a05bc2e176c586f7c6fed59fa474914",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://46f87315e90195a965c7f45312012858ccc1999890f8d8217f11d2a7dd5f10fd",
+				"dweb:/ipfs/QmYEKX2MHdooN6uv6j1VqzZqNPigzjaTWk8XtzSUhY38zm"
+			]
+		},
+		"interfaces/Interfaces.sol": {
+			"keccak256": "0xee0530c67bc949f8da3eacda6169b1e5d3104f41d4625258972286d751892889",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6dae2815788644c715a148b06ff8a6c4cf0316c312e2f4a5f9f2805ae0fd865b",
+				"dweb:/ipfs/QmaeysmpTXnzDCvoKhc7ZLEjfmLasJZ1p4EHNCaZ9Gn3tP"
+			]
+		},
+		"structs/DataTypes.sol": {
+			"keccak256": "0x76f768078444977fb53601693a41788a3bf7a5cd6cf963871c33094de05ac4a7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://80859d867fad8cbb401ab53a763988462e07026830b843cd035d909228d47ee7",
+				"dweb:/ipfs/QmRaBbwdoTxzGKV9N1NmErSZLHTSvcgE1iQgXVivVz4FbB"
+			]
+		}
+	},
+	"version": 1
+}
